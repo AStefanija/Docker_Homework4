@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderervice
+  labels:
+    app: orderservice
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: orderservice
+  template:
+    metadata:
+      labels:
+        app: orderservice
+    spec:
+      containers:
+        - name: orderservice
+          image: your-docker-repo/orderservice:latest
+          ports:
+            - containerPort: 8081
