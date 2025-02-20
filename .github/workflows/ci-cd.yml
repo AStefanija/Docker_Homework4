@@ -33,21 +33,17 @@ jobs:
           docker build -f ./src/main/java/com/example/orderservice/Dockerfile -t stefanija052/homework4/orderservice:latest .
           docker build -f ./src/main/java/com/example/userservice/Dockerfile -t stefanija052/homework4/userservice:latest .
 
-      - name: Tag Docker images with commit SHA
-        run: |
-          COMMIT_SHA=$(git rev-parse --short HEAD)
-          docker tag stefanija052/homework4/authservice:latest stefanija052/homework4/authservice:$COMMIT_SHA
-          docker tag stefanija052/homework4/orderservice:latest stefanija052/homework4/orderservice:$COMMIT_SHA
-          docker tag stefanija052/homework4/userservice:latest stefanija052/homework4/userservice:$COMMIT_SHA
+      - name: Log in to Docker Hub
+        run: docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker images
         run: |
           docker push stefanija052/homework4/authservice:latest
           docker push stefanija052/homework4/orderservice:latest
           docker push stefanija052/homework4/userservice:latest
-          docker push stefanija052/homework4/authservice:$COMMIT_SHA
-          docker push stefanija052/homework4/orderservice:$COMMIT_SHA
-          docker push stefanija052/homework4/userservice:$COMMIT_SHA
         if: github.ref == 'refs/heads/master'
 
   deploy:
