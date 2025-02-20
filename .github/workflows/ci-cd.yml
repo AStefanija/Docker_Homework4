@@ -23,9 +23,9 @@ jobs:
 
       - name: Build Docker images
         run: |
-          docker build -t .\src\main\java\com\example\authservice\Dockerfile ./src/main/java/com/example/authservice
-          docker build -t .\src\main\java\com\example\orderservice\Dockerfile ./src/main/java/com/example/orderservice
-          docker build -t .\src\main\java\com\example\userservice\Dockerfile ./src/main/java/com/example/userservice
+          docker build -f .\src\main\java\com\example\authservice\Dockerfile -t com/example/authservice .
+          docker build -f .\src\main\java\com\example\orderservice\Dockerfile -t com/example/orderservice .
+          docker build -f .\src\main\java\com\example\userservice\Dockerfile -t com/example/useservice .
 
       - name: Push Docker images
         run: |
