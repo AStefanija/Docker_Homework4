@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -29,24 +30,28 @@ jobs:
 
       - name: Build and tag Docker images
         run: |
+          # Build and tag authservice Docker image
           docker build -f ./src/main/java/com/example/authservice/Dockerfile -t authservice:latest .
-          docker tag authservice:latest stefanija052/homework4/authservice:latest
+          docker tag authservice:latest stefanija052/homework4-authservice:latest
 
+          # Build and tag orderservice Docker image
           docker build -f ./src/main/java/com/example/orderservice/Dockerfile -t orderservice:latest .
-          docker tag orderservice:latest stefanija052/homework4/orderservice:latest
+          docker tag orderservice:latest stefanija052/homework4-orderservice:latest
 
+          # Build and tag userservice Docker image
           docker build -f ./src/main/java/com/example/userservice/Dockerfile -t userservice:latest .
-          docker tag userservice:latest stefanija052/homework4/userservice:latest
+          docker tag userservice:latest stefanija052/homework4-userservice:latest
 
       - name: Push Docker images
         run: |
-          docker push stefanija052/homework4/authservice:latest
-          docker push stefanija052/homework4/orderservice:latest
-          docker push stefanija052/homework4/userservice:latest
+          docker push stefanija052/homework4-authservice:latest
+          docker push stefanija052/homework4-orderservice:latest
+          docker push stefanija052/homework4-userservice:latest
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
