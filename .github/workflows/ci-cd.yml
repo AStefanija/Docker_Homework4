@@ -41,7 +41,9 @@ jobs:
 
       - name: Push Docker images
         run: |
-          docker push stefanija052/homework4:latest
+          docker push stefanija052/homework4/authservice:latest
+          docker push stefanija052/homework4/orderservice:latest
+          docker push stefanija052/homework4/userservice:latest
         if: github.ref == 'refs/heads/master'
 
   deploy:
