@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: authservice
-          image: your-docker-repo/authservice:latest
+          image: stefanija052/homework4-authservice:latest
           ports:
             - containerPort: 8081

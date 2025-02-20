@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: userservice
-          image: your-docker-repo/userservice:latest
+          image: stefanija052/homework4-userservice:latest
           ports:
             - containerPort: 8082

@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: orderservice
-          image: your-docker-repo/orderservice:latest
+          image: stefanija052/homework4-orderservice:latest
           ports:
             - containerPort: 8081
