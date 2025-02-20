@@ -82,6 +82,9 @@
 	<profiles>
 		<profile>
 			<id>authservice</id>
+			<activation>
+				<activeByDefault>false</activeByDefault> <!-- Ensure only one profile is active at a time -->
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -97,6 +100,9 @@
 
 		<profile>
 			<id>orderservice</id>
+			<activation>
+				<activeByDefault>false</activeByDefault> <!-- Ensure only one profile is active at a time -->
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -112,6 +118,9 @@
 
 		<profile>
 			<id>userservice</id>
+			<activation>
+				<activeByDefault>false</activeByDefault> <!-- Ensure only one profile is active at a time -->
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
