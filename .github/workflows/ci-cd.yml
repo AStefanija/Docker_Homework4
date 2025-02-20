@@ -23,15 +23,16 @@ jobs:
 
       - name: Build Docker images
         run: |
-          docker build -t your-docker-repo/authservice ./src/main/java/com/example/authservice
-          docker build -t your-docker-repo/orderservice ./src/main/java/com/example/orderservice
-          docker build -t your-docker-repo/userservice ./src/main/java/com/example/userservice
+          docker build -t .\src\main\java\com\example\authservice\Dockerfile ./src/main/java/com/example/authservice
+          docker build -t .\src\main\java\com\example\orderservice\Dockerfile ./src/main/java/com/example/orderservice
+          docker build -t .\src\main\java\com\example\userservice\Dockerfile ./src/main/java/com/example/userservice
 
       - name: Push Docker images
         run: |
-          docker push your-docker-repo/authservice:latest
-          docker push your-docker-repo/orderservice:latest
-          docker push your-docker-repo/userservice:latest
+          docker push homework4/authservice:latest
+          docker push homework4/orderservice:latest
+          docker push homework4/userservice:latest
+        if: github.ref == 'refs/heads/master'
 
   deploy:
     runs-on: ubuntu-latest
