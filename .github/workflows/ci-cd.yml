@@ -27,17 +27,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker images
+      - name: Build and tag Docker images
         run: |
-          docker build -f ./src/main/java/com/example/authservice/Dockerfile -t stefanija052/homework4/authservice:latest .
-          docker build -f ./src/main/java/com/example/orderservice/Dockerfile -t stefanija052/homework4/orderservice:latest .
-          docker build -f ./src/main/java/com/example/userservice/Dockerfile -t stefanija052/homework4/userservice:latest .
+          docker build -f ./src/main/java/com/example/authservice/Dockerfile -t authservice:latest .
+          docker tag authservice:latest stefanija052/homework4/authservice:latest
 
-      - name: Log in to Docker Hub
-        run: docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          docker build -f ./src/main/java/com/example/orderservice/Dockerfile -t orderservice:latest .
+          docker tag orderservice:latest stefanija052/homework4/orderservice:latest
+
+          docker build -f ./src/main/java/com/example/userservice/Dockerfile -t userservice:latest .
+          docker tag userservice:latest stefanija052/homework4/userservice:latest
 
       - name: Push Docker images
         run: |
