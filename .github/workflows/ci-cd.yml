@@ -29,15 +29,15 @@ jobs:
 
       - name: Build Docker images
         run: |
-          docker build -f ./src/main/java/com/example/authservice/Dockerfile -t homework4/authservice .
-          docker build -f ./src/main/java/com/example/orderservice/Dockerfile -t homework4/orderservice .
-          docker build -f ./src/main/java/com/example/userservice/Dockerfile -t homework4/userservice .
+          docker build -f ./src/main/java/com/example/authservice/Dockerfile -t stefanija052/homework4/authservice .
+          docker build -f ./src/main/java/com/example/orderservice/Dockerfile -t stefanija052/homework4/orderservice .
+          docker build -f ./src/main/java/com/example/userservice/Dockerfile -t stefanija052/homework4/userservice .
 
       - name: Push Docker images
         run: |
-          docker push homework4/authservice:latest
-          docker push homework4/orderservice:latest
-          docker push homework4/userservice:latest
+          docker push stefanija052/homework4/authservice:latest
+          docker push stefanija052//orderservice:latest
+          docker push stefanija052/homework4/userservice:latest
         if: github.ref == 'refs/heads/master'
 
   deploy:
