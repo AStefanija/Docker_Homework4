@@ -56,31 +56,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Minikube
-        run: |
-          curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-          sudo mv minikube-linux-amd64 /usr/local/bin/minikube
-          sudo chmod +x /usr/local/bin/minikube
-
-      - name: Start Minikube
-        run: |
-          minikube start --driver=docker --embed-certs
-
       - name: Set up Kubernetes configuration
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
           chmod 600 ~/.kube/config
+          kubectl config use-context minikube
 
-      - name: Set up Kubernetes certificates
+      - name: Verify Kubernetes connection
         run: |
-          mkdir -p ~/.minikube/profiles/minikube
-          echo "${{ secrets.KUBE_CLIENT_CERT }}" > ~/.minikube/profiles/minikube/client.crt
-          echo "${{ secrets.KUBE_CLIENT_KEY }}" > ~/.minikube/profiles/minikube/client.key
-          echo "${{ secrets.KUBE_CA_CERT }}" > ~/.minikube/ca.crt
-
-      - name: Set up kubectl
-        run: kubectl version --client
+          kubectl version --client
+          kubectl get nodes
 
       - name: Deploy authservice to Kubernetes
         run: kubectl apply -f ./src/main/java/com/example/authservice/kubernetes/
