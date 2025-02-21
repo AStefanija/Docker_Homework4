@@ -67,10 +67,6 @@ jobs:
         run: |
           kubectl version --client
 
-      - name: Get Minikube IP
-        run: |
-          curl http://192.168.49.2:80
-
       - name: Deploy authservice to Kubernetes
         run: kubectl apply -f ./src/main/java/com/example/authservice/kubernetes/
 
