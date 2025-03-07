@@ -30,8 +30,8 @@ class UserServiceTests {
 
     @Test
     void testGetAllUsers() {
-        User user1 = new User(1L, "John", "johndoe@example.com");
-        User user2 = new User(2L, "Jane", "janesmith@example.com");
+        User user1 = new User(1L, "Doe", "johndoe@example.com");
+        User user2 = new User(2L, "Smith", "janesmith@example.com");
         List<User> users = Arrays.asList(user1, user2);
         when(userRepository.findAll()).thenReturn(users);
         List<User> result = userService.getAllUsers();
