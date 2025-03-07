@@ -22,11 +22,20 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Build Docker image
-        run: docker build -t myapp-prod .
+      - name: Build and tag Docker images
+        run: |
+          docker build -f ./src/main/java/com/example/authservice/Dockerfile -t authservice:latest .
+          docker tag authservice:latest stefanija052/myapp-prod-authservice:latest
+          
+          docker build -f ./src/main/java/com/example/userservice/Dockerfile -t userservice:latest .
+          docker tag userservice:latest stefanija052/myapp-prod-userservice:latest
+
+          docker build -f ./src/main/java/com/example/orderservice/Dockerfile -t orderservice:latest .
+          docker tag orderservice:latest stefanija052/myapp-prod-orderservice:latest
 
       - name: Push Docker image
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker tag myapp-prod myrepo/myapp-prod:latest
-          docker push myrepo/myapp-prod:latest
+          docker push stefanija052/myapp-prod-authservice:latest
+          docker push stefanija052/myapp-prod-userservice:latest
+          docker push stefanija052/myapp-prod-orderservice:latest
